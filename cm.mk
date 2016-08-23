@@ -36,7 +36,7 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_BRAND := samsung \
     PRODUCT_MANUFACTURER := samsung
 
-$(call inherit-product, device/samsung/chagall-klimt-common/device.mk)
+$(call inherit-product, device/samsung/tabs-common/device.mk)
 $(call inherit-product, device/samsung/klimtlte/device.mk)
 
 $(call inherit-product-if-exists, vendor/samsung/klimtlte/device-vendor.mk)
