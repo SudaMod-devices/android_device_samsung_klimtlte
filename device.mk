@@ -14,10 +14,15 @@
 # limitations under the License.
 #
 
-$(call inherit-product, device/samsung/chagall-klimt-common/device.mk)
+$(call inherit-product, device/samsung/tabs-common/device.mk)
 
 PRODUCT_PACKAGES += \
     init.baseband.rc
+
+# Boot animation
+TARGET_BOOTANIMATION_HALF_RES := true
+TARGET_SCREEN_HEIGHT := 2560
+TARGET_SCREEN_WIDTH := 1600
 
 PRODUCT_COPY_FILES += \
     device/samsung/klimtlte/audio/audio_policy.conf:system/etc/audio_policy.conf
@@ -44,10 +49,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
-    rild.libpath=/system/lib/libsec-ril.so
-    rild.libargs=-d /dev/ttyS0
-    ro.telephony.default_network=9
-    ro.ril.telephony.mqanelements=6
+    rild.libpath=/system/lib/libsec-ril.so \
+    rild.libargs=-d /dev/ttyS0 \
+    ro.telephony.default_network=9 \
+	ro.telephony.ril_class=SlteRIL \
+    ro.ril.telephony.mqanelements=5
+
+# cpboot-daemon for modem
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/ril/sbin/cbd:root/sbin/cbd
 
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/tablet-7in-xhdpi-2048-dalvik-heap.mk)

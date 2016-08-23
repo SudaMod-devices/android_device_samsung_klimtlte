@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2015 Schischu
+# Copyright (C) 2016 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,18 +16,25 @@
 
 TARGET_PATH := device/samsung/klimtlte
 
-include device/samsung/chagall-klimt-common/BoardConfig.mk
+include device/samsung/tabs-common/BoardConfig.mk
 
 # RIL
 BOARD_PROVIDES_LIBRIL := true
 # hardware/samsung/ril
 BOARD_MODEM_TYPE := xmm7260
+# RIL.java overwrite
+BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril
+BOARD_MODEM_NEEDS_VIDEO_CALL_FIELD := true
 
 BOARD_CAMERA_FRONT_ROTATION=270
 BOARD_CAMERA_BACK_ROTATION=90
 
 # Kernel
 TARGET_KERNEL_CONFIG := cyanogenmod_klimtlte_defconfig
+
+# Hardware
+BOARD_HARDWARE_CLASS += device/samsung/klimtlte/cmhw
+BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
 
 # Bootloader
 TARGET_OTA_ASSERT_DEVICE := klimtlte

@@ -1,5 +1,5 @@
 #
-# Copyright 2013 The Android Open-Source Project
+# Copyright 2016 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,33 +14,30 @@
 # limitations under the License.
 #
 
-# Sample: This is where we'd set a backup provider if we had one
-# $(call inherit-product, device/sample/products/backup_overlay.mk)
-
-# Get the long list of APNs
-PRODUCT_COPY_FILES := device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
-
 # Inherit from the common Open Source product configuration
 ##$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 ##$(call inherit-product, $(SRC_TARGET_DIR)/product/telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 
-PRODUCT_NAME := klimtltexx
+# Inherit some common CM stuff.
+$(call inherit-product, vendor/cm/config/common_full_tablet_wifionly.mk)
+
+# Inherit more cyanogenmod stuff.
+$(call inherit-product, vendor/cm/config/telephony.mk)
+
+PRODUCT_NAME := cm_klimtlte
 PRODUCT_DEVICE := klimtlte
-PRODUCT_BRAND := samsung
-PRODUCT_MODEL := SM-T705
-PRODUCT_MANUFACTURER := samsung
+
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PRODUCT_MODEL=SM-T705 \
+    PRODUCT_NAME=klimtlte \
+    PRODUCT_DEVICE=klimtlte \
+    TARGET_DEVICE=klimtlte \
+    PRODUCT_BRAND := samsung \
+    PRODUCT_MANUFACTURER := samsung
 
 $(call inherit-product, device/samsung/chagall-klimt-common/device.mk)
 $(call inherit-product, device/samsung/klimtlte/device.mk)
 
 $(call inherit-product-if-exists, vendor/samsung/klimtlte/device-vendor.mk)
-
-PRODUCT_NAME := aosp_klimtlte
-
-PRODUCT_PACKAGES += \
-    Launcher3 \
-    OneTimeInitializer \
-    Gallery2 \
-    OpenDelta
 
